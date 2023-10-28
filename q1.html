@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include Vega, Vega-Lite, and Vega-Embed JavaScript libraries from CDNs -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <style>
+        /* CSS for paragraph comment */
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+        .title {
+            font-size: 24px;
+            color: #333;
+        }
+        .comment {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 2px solid #ccc;
+            margin: 20px;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title in the middle -->
+        <h1 class="title">Question 1</h1>
+    </div>
+
+    <!-- Create a container for the Vega-Lite chart with the ID "chart" -->
+    <div id="chart" style="text-align: center;"></div>
+
+    <script>
+        // Define a Vega-Lite specification for the chart
+        const spec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+            "data": {
+                "url": "transactions-smaller.csv" // Data source from a CSV file
+            },
+            "title": "Group 3", // Chart title
+            "mark": "bar", // Create a bar chart
+            "encoding": {
+                "x": {"field": "property_usage_en", "type": "ordinal"}, // X-axis configuration
+                "y": {"aggregate": "count", "type": "quantitative"}, // Y-axis configuration
+                "color": {
+                    "field": "property_usage_en", // Color encoding based on "property_usage_en" field
+                    "type": "nominal",
+                    "scale": {
+                        "domain": ["Agriculture", "Commercial", "Hospitality", "Industrial", "Multi-Use", "Other", "Residential", "Storage"],
+                        "range": ["blue", "orange", "red", "lightblue", "green", "yellow", "purple", "pink"]
+                    }
+                }
+            }};
+
+        // Embed and render the chart in the "chart" container
+        vegaEmbed("#chart", spec).catch(console.error);
+    </script>
+
+    <!-- Paragraph comment with CSS styling -->
+    <div class="comment">
+        The graph above is a bar chart using Vega-Lite. This chart is specifically identified as a "bar chart" because the script utilizes the "mark" property set to "bar" in its configuration. In this chart, the x-axis represents various categories found in the "property_usage_en" field, encompassing options such as agriculture, commercial, hospitality, industrial, multi-use, other, residential, and storage. The y-axis is labeled "Count of Records," and its values range from 0 to 25,000, marked at intervals of 5,000. The color of the bars in the chart plays a vital role in distinguishing between different values within the "property_usage_en" field. Notably, agriculture, hospitality, industrial, multi-use, and storage categories are represented by bars with a count of 0, meaning no records. In contrast, the "Residential" category boasts the highest bar with an approximate count of 26,000, followed by "Commercial" with a bar count of roughly 4,700, and "Other" with a count of around 500. This chart provides a clear and informative visual summary of data distribution across these property usage categories.
+    </div>
+</body>
+</html>
